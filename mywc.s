@@ -42,9 +42,9 @@ iChar: .skip 4
 
     .global main 
  
- main:
-
-    // Prolog
+main:
+        // Prolog
+        
 
     //
 
