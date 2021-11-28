@@ -57,8 +57,8 @@ main:
 
 fileLoop:
         // if (iChar == EOF) goto fileLoopEnd
-        adr w0, iChar
-        ldr w0, [w0]
+        adr x0, iChar
+        ldr w0, [x0]
         cmp w0, EOF
         beq fileLoopEnd
 
@@ -69,15 +69,15 @@ fileLoop:
         str x1, [x0]
 
         // if (!isspace(iChar)) goto else1;
-        adr w0, iChar
-        str w0, [w0]
-        bl isspace
-        cmp x0, FALSE
+        adr x0, iChar
+        str w0, [x0]
+        bl isspace 
+        cmp w0, FALSE
         beq else1 
 
         // if(!iInWord) goto if2;
-        adr w0, iInWord
-        str w0, [w0]
+        adr x0, iInWord
+        str w0, [x0]
         cmp w0, FALSE
         beq if2
 
@@ -89,25 +89,27 @@ fileLoop:
 
         // iInWord = FALSE;
         adr x0, iInWord
-        str FALSE, [x0] 
+        mov x1, FALSE
+        str x0, [x1] 
 
         // goto if2;
         b if2
 else1:
         // if (iInWord) goto if2;
-        adr w0, iInWord
-        str w0, [w0]
+        adr x0, iInWord
+        str w0, [x0]
         cmp w0, TRUE
         beq if2
 
         // iInWord = TRUE;
-        adr w0, iInWord
-        str TRUE, [w0]
+        adr x0, iInWord
+        mov x1, TRUE
+        str x0, [x1]
 
 if2:
         // if (iChar != '\n') goto endif2;
-        adr w0, iChar
-        str w0, [w0]
+        adr x0, iChar
+        str w0, [x0]
         mov w1, newline
         cmp w0, w1
         bne endif2
@@ -129,8 +131,8 @@ endif2:
 
 fileLoopEnd:
         // if (!iInWord) goto endFile;
-        adr w0, iInWord
-        str w0, [w0]
+        adr x0, iInWord
+        str w0, [x0]
         cmp w0, FALSE
         beq endFile
 
@@ -144,12 +146,12 @@ fileLoopEnd:
 endFile:
         // printf("%7ld %7ld %7ld\n", lLineCount, lWordCount, lCharCount);
         adr x0, printfFormatStr
-        adr w1, lLineCount
-        ldr w1, [w1]
-        adr w2, lWordCount
-        ldr w2, [w2]
-        adr w3, lCharCount
-        ldr w3, [w3]
+        adr x1, lLineCount
+        ldr w1, [x1]
+        adr x2, lWordCount
+        ldr w2, [x2]
+        adr x3, lCharCount
+        ldr w3, [x3]
         bl printf
 
         // Epilog and return 0;   
