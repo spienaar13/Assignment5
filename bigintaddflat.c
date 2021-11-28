@@ -18,7 +18,6 @@ enum {FALSE, TRUE};
 static long BigInt_larger(long lLength1, long lLength2)
 {
    long lLarger;
-if1:
    if (lLength1 <= lLength2) goto else1;
       lLarger = lLength1;
       goto endif1;
@@ -52,10 +51,9 @@ int BigInt_add(BigInt_T oAddend1, BigInt_T oAddend2, BigInt_T oSum)
    lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength);
 
    /* Clear oSum's array if necessary. */
-if2:
    if (oSum->lLength <= lSumLength) goto endif2;
-      memset(oSum->aulDigits, 0, MAX_DIGITS * sizeof(unsigned long));
-      goto endif2;
+   memset(oSum->aulDigits, 0, MAX_DIGITS * sizeof(unsigned long));
+   goto endif2;
 endif2:
    /* Perform the addition. */
    ulCarry = 0;
