@@ -4,7 +4,7 @@
 //----------------------------------------------------------------------
 
     .equ FALSE, 0
-    .equ TRUE, 0
+    .equ TRUE, 1
 
 //----------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ iChar: .skip 4
     //------------------------------------------------------------------
 
     // Must be a multiple of 16
-    .equ MAIN_STACK_BYTECOUNT, 32
+    .equ MAIN_STACK_BYTECOUNT, 16
     .equ EOF, -1
     .equ newline, '\n'
 
@@ -70,7 +70,7 @@ fileLoop:
 
         // if (!isspace(iChar)) goto else1;
         adr x0, iChar
-        str w0, [x0]
+        ldrb w0, [x0]
         bl isspace 
         cmp w0, FALSE
         beq else1 
