@@ -1,0 +1,39 @@
+/*--------------------------------------------------------------------*/
+/* stressrandchars.c                                                  */
+/* Author: Charles Coppieters and Stephane Pienaar                    */
+/*--------------------------------------------------------------------*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int newLineCounter = 0;
+int newLineLimit = 1000;
+int charCounter = 0;
+int charLimit = 5000;
+
+void generateInt() {
+   int n;
+   int mod = 0x7f;
+   n = rand();
+   n = n % mod;
+   if (n == 0x09) {
+      putchar(n);
+      charCounter++;
+   }
+   else if (n>0x20 && n<0x7E) {
+      putchar(n);
+      charCounter++;
+   }
+   else if (n == 0x0A) {
+      putchar(n);
+      charCounter++;
+      newLineCounter++;
+   }
+}
+
+int main(void) {
+   while(charCounter <= charLimit && newLineCounter <= newLineCounter) {
+      generateInt();
+   }
+   return 0;
+}
