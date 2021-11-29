@@ -57,8 +57,8 @@ main:
 
 fileLoop:
         // if (iChar == EOF) goto fileLoopEnd
-        adr x0, iChar
-        ldr w0, [x0]
+        adr x1, iChar
+        ldr w0, [x1]
         cmp w0, EOF
         beq fileLoopEnd
 
@@ -69,15 +69,15 @@ fileLoop:
         str x1, [x0]
 
         // if (!isspace(iChar)) goto else1;
-        adr x0, iChar
-        ldrb w0, [x0]
-        bl isspace 
+        adr x1, iChar
+        ldr w0, [x1]
+        bl isspace
         cmp w0, FALSE
         beq else1 
 
         // if(!iInWord) goto if2;
         adr x0, iInWord
-        str w0, [x0]
+        ldr w0, [x0]
         cmp w0, FALSE
         beq if2
 
@@ -90,35 +90,34 @@ fileLoop:
         // iInWord = FALSE;
         adr x0, iInWord
         mov x1, FALSE
-        str x0, [x1] 
+        str x1, [x0] 
 
         // goto if2;
         b if2
 else1:
         // if (iInWord) goto if2;
-        adr x0, iInWord
-        str w0, [x0]
-        cmp w0, TRUE
-        beq if2
+        adr x1, iInWord
+        ldr w0, [x1]
+        cmp w0, FALSE
+        bne if2
 
         // iInWord = TRUE;
         adr x0, iInWord
         mov x1, TRUE
-        str x0, [x1]
+        str x1, [x0]
 
 if2:
         // if (iChar != '\n') goto endif2;
         adr x0, iChar
-        str w0, [x0]
-        mov w1, newline
-        cmp w0, w1
+        ldr w0, [x0]
+        cmp w0, newline
         bne endif2
 
         // lLineCount++;
         adr x0, lLineCount
-        ldr x1, [x0]
-        add x1, x1, 1
-        str x1, [x0]
+        ldr w1, [x0]
+        add w1, w1, 1
+        str w1, [x0]
 
 endif2:
         // iChar = getchar();
@@ -131,8 +130,8 @@ endif2:
 
 fileLoopEnd:
         // if (!iInWord) goto endFile;
-        adr x0, iInWord
-        str w0, [x0]
+        adr x1, iInWord
+        ldr w0, [x1]
         cmp w0, FALSE
         beq endFile
 
