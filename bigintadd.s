@@ -150,6 +150,14 @@ Loop1:
         str xzr, [sp, ulCarry]
 
         // ulSum += oAddend1->aulDigits[lIndex];
+        ldr x0, [sp, oAddend1]
+        add x0, x0, 8
+        ldr x1, [sp, lIndex]
+        ldr x0, [x0, x1, lsl 3]
+        ldr x2, [sp, ulSum]
+        add x2, x0, x2
+        str x2, [x2]
+        
 
         // if (ulSum >= oAddend1->aulDigits[lIndex]) goto if3;
         ldr    x0, [sp, ulSum]
@@ -166,7 +174,23 @@ Loop1:
         str x0, [sp, ulCarry]
 if3:
         // ulSum += oAddend2->aulDigits[lIndex];
-        // if (ulSum >= oAddend2->aulDigits[lIndex]) goto if4;/* Check for overflow. */
+        ldr x0, [sp, oAddend2]
+        add x0, x0, 8
+        ldr x1, [sp, lIndex]
+        ldr x0, [x0, x1, lsl 3]
+        ldr x2, [sp, ulSum]
+        add x2, x0, x2
+        str x2, [x2]
+        
+        // if (ulSum >= oAddend2->aulDigits[lIndex]) goto if4;
+        ldr    x0, [sp, ulSum]
+        ldr    x1, [sp, oAddend2]
+        add    x1, x1, 8
+        ldr    x3, [sp, lIndex]
+        mov    x2, x3
+        ldr    x1, [x1, x2, lsl 3]
+        cmp    x0, x1
+        bge    if4
         
         // ulCarry = 1;
         mov x0, 1
@@ -175,9 +199,9 @@ if4:
         // oSum->aulDigits[lIndex] = ulSum;
         ldr x0, [sp, oSum]
         add x0, x0, 8
-        ldr x3, [sp, ulSum]
+        ldr x2, [sp, ulSum]
         ldr x1, [sp, lIndex]
-        str x3, [x0,x1, lsl 3]
+        str x2, [x0,x1, lsl 3]
         
         // lIndex++;
         ldr x0, [sp, lIndex]
@@ -206,13 +230,11 @@ endLoop1:
         
 endif5:
         // oSum->aulDigits[lSumLength] = 1;
-        ldr    x0, [sp, oSum]
-        add    x0, x0, 8
-        mov    x1, 2
-        ldr    x2, [sp, lSumLength]
-        ldr    x0, [x0, x1, lsl x2]
-        mov    x1, 1
-        str    x1, x0
+        ldr x0, [sp, oSum]
+        add x0, x0, 8
+        mov x2, 1
+        ldr x1, [sp, lSumLength]
+        str x2, [x0,x1, lsl 3]
 
         // lSumLength++;
         ldr x0, [sp, lSumLength]
