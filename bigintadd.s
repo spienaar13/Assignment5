@@ -228,7 +228,7 @@ endLoop1:
         add sp, sp, BIGINT_ADD_STACK_BYTECOUNT
         ret
         
-        .global BigInt_add, (. - BigInt_add)
+        .size .global BigInt_add, (. - BigInt_add)
         
 endif5:
         // oSum->aulDigits[lSumLength] = 1;
@@ -253,4 +253,4 @@ if5:
         add    sp, sp, BIGINT_ADD_STACK_BYTECOUNT
         ret
 
-        .global BigInt_add, (. - BigInt_add)
+        .size .global BigInt_add, (. - BigInt_add)
