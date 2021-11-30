@@ -84,7 +84,7 @@ endif1:
 
         // Local variable stack offsets:
             .equ ulCarry, 8
-            .equ u1Sum, 16
+            .equ ulSum, 16
             .equ lIndex, 24
             .equ lSumLength, 32
 
