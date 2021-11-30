@@ -228,6 +228,8 @@ endLoop1:
         add sp, sp, BIGINT_ADD_STACK_BYTECOUNT
         ret
         
+        .size BigInt_add, (. - BigInt_add)
+        
 endif5:
         // oSum->aulDigits[lSumLength] = 1;
         ldr x0, [sp, oSum]
