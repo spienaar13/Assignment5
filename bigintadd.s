@@ -92,6 +92,8 @@ endif1:
             .equ oAddend1, 40
             .equ oAddend2, 48
             .equ oSum, 56
+            
+            .global BigInt_add
 
 BigInt_add:
 
@@ -228,8 +230,6 @@ endLoop1:
         add sp, sp, BIGINT_ADD_STACK_BYTECOUNT
         ret
         
-        .size .global BigInt_add, (. - BigInt_add)
-        
 endif5:
         // oSum->aulDigits[lSumLength] = 1;
         ldr x0, [sp, oSum]
@@ -253,4 +253,4 @@ if5:
         add    sp, sp, BIGINT_ADD_STACK_BYTECOUNT
         ret
 
-        .size .global BigInt_add, (. - BigInt_add)
+        .size BigInt_add, (. - BigInt_add)
