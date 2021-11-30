@@ -39,7 +39,7 @@
         .equ    LLENGTH1, 16
         .equ    LLENGTH2, 24
 
-bigint_larger:
+BigInt_larger:
 
         // Prolog
         sub    sp, sp, BIGINT_LARGER_STACK_BYTECOUNT
@@ -71,7 +71,7 @@ endif1:
         add    sp, sp, BIGINT_LARGER_STACK_BYTECOUNT
         ret
 
-        .size bigint_larger, (. - bigint_larger)
+        .size BigInt_larger, (. - bigint_larger)
 
         //--------------------------------------------------------------
         // Assign the sum of oAddend1 and oAddend2 to oSum. oSum should
@@ -93,7 +93,7 @@ endif1:
             .equ oAddend2, 48
             .equ oSum, 56
 
-bigint_add:
+BigInt_add:
 
         // Prolog
         sub    sp, sp, BIGINT_ADD_STACK_BYTECOUNT
@@ -251,4 +251,4 @@ if5:
         add    sp, sp, BIGINT_ADD_STACK_BYTECOUNT
         ret
 
-        .size bigint_add, (. - bigint_add)
+        .size BigInt_add, (. - bigint_add)
