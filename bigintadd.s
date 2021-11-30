@@ -106,7 +106,7 @@ bigint_add:
 
         // lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength);
         ldr    x0, [sp, oAddend1]
-        ldr    x1, [sp,, oAddend2]
+        ldr    x1, [sp, oAddend2]
         bl     BigInt_larger
         str    x0, [sp, lSumLength]
 
@@ -121,7 +121,8 @@ bigint_add:
         add    x0, x0, 8
         mov    x1, 0
         mov    x2, MAX_DIGITS
-        mul    x2, x2, SIZEOFULONG
+        ldr    x3, SIZEOFULONG
+        mul    x2, x2, x3
         bl    memset
 
 endif2:
@@ -154,9 +155,9 @@ Loop1:
         ldr    x0, [sp, ulSum]
         ldr    x1, [sp, oAddend1]
         add    x1, x1, 8
-        mov    x2, 2
         ldr    x3, [sp, lIndex]
-        ldr    x1, [x1, x2, lsl x3]
+        mov    x2, x3
+        ldr    x1, [x1, x2, lsl 3]
         cmp    x0, x1
         bge    if3
 
@@ -174,10 +175,9 @@ if4:
         // oSum->aulDigits[lIndex] = ulSum;
         ldr x0, [sp, oSum]
         add x0, x0, 8
-        mov x1, 2
-        ldr x3, [sp, lIndex]
-        ldr x2, [x0, x1, lsl x3]
-        str x0, x2
+        ldr x3, [sp, ulSum]
+        ldr x1, [sp, lIndex]
+        str x3, [x0,x1, lsl 3]
         
         // lIndex++;
         ldr x0, [sp, lIndex]
