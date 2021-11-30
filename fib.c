@@ -2,7 +2,7 @@
 /* fib.c                                                              */
 /* Author: Bob Dondero                                                */
 /*--------------------------------------------------------------------*/
-
+     
 #include "bigint.h"
 #include <stdio.h>
 #include <stdlib.h>
