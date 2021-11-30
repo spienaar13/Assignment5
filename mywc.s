@@ -89,8 +89,8 @@ fileLoop:
 
         // iInWord = FALSE;
         adr x0, iInWord
-        mov x1, FALSE
-        str x1, [x0] 
+        mov w1, FALSE
+        str w1, [x0] 
 
         // goto if2;
         b if2
@@ -103,8 +103,8 @@ else1:
 
         // iInWord = TRUE;
         adr x0, iInWord
-        mov x1, TRUE
-        str x1, [x0]
+        mov w1, TRUE
+        str w1, [x0]
 
 if2:
         // if (iChar != '\n') goto endif2;
