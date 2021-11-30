@@ -71,7 +71,7 @@ endif1:
         add    sp, sp, BIGINT_LARGER_STACK_BYTECOUNT
         ret
 
-        .size BigInt_larger, (. - bigint_larger)
+        .size BigInt_larger, (. - BigInt_larger)
 
         //--------------------------------------------------------------
         // Assign the sum of oAddend1 and oAddend2 to oSum. oSum should
@@ -251,4 +251,4 @@ if5:
         add    sp, sp, BIGINT_ADD_STACK_BYTECOUNT
         ret
 
-        .size BigInt_add, (. - bigint_add)
+        .size BigInt_add, (. - BigInt_add)
