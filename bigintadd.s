@@ -3,6 +3,13 @@
 // Author: Charles Coppieters 't wallant
 //----------------------------------------------------------------------
 
+        .equ FALSE, 0
+        .equ TRUE, 1
+        .equ MAX_DIGITS, 32768
+        .equ SIZEOFULONG, 8
+
+//----------------------------------------------------------------------        
+        
         .section .rodata
 
 //----------------------------------------------------------------------
@@ -44,7 +51,7 @@ bigint_larger:
         ldr    x0, [sp, LLENGTH1]
         ldr    x1, [sp, LLENGTH2]
         cmp    x0, x1
-        beq    else1
+        ble    else1
 
         // lLarger = lLength1;
         ldr    x0, [sp, LLENGTH1]
@@ -57,9 +64,6 @@ else1:
         // lLarger = lLength2;
         ldr    x0, [sp, LLENGTH2]
         str    x0, [sp, LLARGER]
-
-        // goto endif1;
-        b    endif1
 
 endif1:
         // Epilog and return llarger
@@ -76,7 +80,18 @@ endif1:
         //--------------------------------------------------------------
 
         // Must be a multiple of 16
-            .equ BIGINT_ADD_STACK_BYTECOUNT, 16
+            .equ BIGINT_ADD_STACK_BYTECOUNT, 64
+
+        // Local variable stack offsets:
+            .equ ulCarry, 8
+            .equ u1Sum, 16
+            .equ lIndex, 24
+            .equ lSumLength, 32
+
+        // Parameter stack offsets
+            .equ oAddend1, 40
+            .equ oAddend2, 48
+            .equ oSum, 56
 
 bigint_add:
 
@@ -86,9 +101,131 @@ bigint_add:
 
         // unsigned long ulCarry;
         // unsigned long u1Sum;
+        // long lIndex;
+        // long lSumLength;
 
-        // Epilog and Return
-        ldr    x30, [sp]
+        // lSumLength = BigInt_larger(oAddend1->lLength, oAddend2->lLength);
+        ldr    x0, [sp, oAddend1]
+        ldr    x1, [sp,, oAddend2]
+        bl     BigInt_larger
+        str    x0, [sp, lSumLength]
+
+        // if (oSum->lLength <= lSumLength) goto endif2;
+        ldr    x0, [sp, oSum]
+        ldr    x1, [sp, lSumLength]
+        cmp    x0, x1
+        ble    endif2
+
+        // memset(oSum->aulDigits, 0, MAX_DIGITS * sizeof(unsigned long));
+        ldr    x0, [sp, oSum]
+        add    x0, x0, 8
+        mov    x1, 0
+        mov    x2, MAX_DIGITS
+        mul    x2, x2, SIZEOFULONG
+        bl    memset
+
+endif2:
+        // ulCarry = 0;
+        str xzr, [sp, ulCarry]
+
+        // lIndex = 0;
+        str xzr, [sp, lIndex]
+
+        // goto Loop1;
+        b Loop1
+
+Loop1:
+        // if(lIndex >= lSumLength) goto endLoop1;
+        ldr    x0, [sp, lIndex]
+        ldr    x1, [sp, lSumLength]
+        cmp    x0, x1
+        bge    endLoop1
+    
+        // ulSum = ulCarry;
+        ldr x0, [sp, ulCarry]
+        str x0, [sp, ulCarry]
+
+        // ulCarry = 0;
+        str xzr, [sp, ulCarry]
+
+        // ulSum += oAddend1->aulDigits[lIndex];
+
+        // if (ulSum >= oAddend1->aulDigits[lIndex]) goto if3;
+        ldr    x0, [sp, ulSum]
+        ldr    x1, [sp, oAddend1]
+        add    x1, x1, 8
+        mov    x2, 2
+        ldr    x3, [sp, lIndex]
+        ldr    x1, [x1, x2, lsl x3]
+        cmp    x0, x1
+        bge    if3
+
+        // ulCarry = 1;
+        mov x0, 1
+        str x0, [sp, ulCarry]
+if3:
+        // ulSum += oAddend2->aulDigits[lIndex];
+        // if (ulSum >= oAddend2->aulDigits[lIndex]) goto if4;/* Check for overflow. */
+        
+        // ulCarry = 1;
+        mov x0, 1
+        str x0, [sp, ulCarry]
+if4:
+        // oSum->aulDigits[lIndex] = ulSum;
+        ldr x0, [sp, oSum]
+        add x0, x0, 8
+        mov x1, 2
+        ldr x3, [sp, lIndex]
+        ldr x2, [x0, x1, lsl x3]
+        str x0, x2
+        
+        // lIndex++;
+        ldr x0, [sp, lIndex]
+        add x0, x0, 1
+        str x0, [sp, lIndex]
+
+        // goto Loop1;
+        b Loop1
+
+endLoop1:
+        // if (ulCarry != 1) goto if5;
+        ldr x0, [sp, ulCarry]
+        cmp x0, 1
+        bne if5
+        
+        // if (lSumLength != MAX_DIGITS) goto endif5;
+        ldr x0, [sp, lSumLength]
+        cmp x0, MAX_DIGITS
+        bne endif5
+
+        // Epilog and return FALSE;
+        mov w0, FALSE 
+        ldr x30, [sp]
+        add sp, sp, BIGINT_ADD_STACK_BYTECOUNT
+        ret
+        
+endif5:
+        // oSum->aulDigits[lSumLength] = 1;
+        ldr    x0, [sp, oSum]
+        add    x0, x0, 8
+        mov    x1, 2
+        ldr    x2, [sp, lSumLength]
+        ldr    x0, [x0, x1, lsl x2]
+        mov    x1, 1
+        str    x1, x0
+
+        // lSumLength++;
+        ldr x0, [sp, lSumLength]
+        add x0, x0, 1
+        str x0, [sp, lSumLength]
+if5:
+        // oSum->lLength = lSumLength;
+        ldr x0, [sp, lSumLength]
+        str x0, [sp, oSum]
+        
+        // Epilog and return TRUE;
+        mov w0, TRUE 
+        ldr x30, [sp]
         add    sp, sp, BIGINT_ADD_STACK_BYTECOUNT
         ret
 
