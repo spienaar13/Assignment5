@@ -13,7 +13,7 @@ const int newLineLimit = 1000;
 /* counts the amount of new chars currently added to stdout */
 int charCounter = 0;
 /* max number of new chars allowed for stress test */
-const int charLimit = 5000;
+const int charLimit = 50000;
 
 /* generates a pseudo-random integer using rand() and
    mods the integer to be in the ASCII range. If the
