@@ -143,7 +143,7 @@ Statement Tests:
 
 Stress Tests:
 
-  mywcstress1.txt: This file contains randomly generated valid
+  mywcstressrandchars.txt: This file contains randomly generated
                    ASCII characters generated from a function
                    that randomly generated chars until either
                    50,000 characters were printed or 1000 lines
