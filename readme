@@ -147,9 +147,21 @@ Stress Tests:
                    ASCII characters generated from a function
                    that randomly generated chars until either
                    50,000 characters were printed or 1000 lines
-                   were reached. This file reaches 
-  mywcstresscharlimit.txt:
-  mywcstresslinelimit.txt:
+                   were reached. This file reaches 50,000
+                   characters before it reaches 1000 lines.
+                   This file tests that the program can
+                   handle 50,000 characters of all types 
+                   in this case.
+  mywcstresscharlimit.txt: This file contains 50,000 instances
+                           of the characeter 'x' with no other
+                           chars. This file tests that the 
+                           program can handle 50,000 characters
+                           in this case.
+  mywcstresslinelimit.txt: This file contains 1000 lines with
+                           each line containing an 'x' 
+                           character and a newline characeter.
+                           This file tests that the program can
+                           handle 1000 lines in this case.
 
 
 ------------------------------------------------------------------------
@@ -160,7 +172,7 @@ Part 2a:  __12.11___ seconds
 
 Part 2b:  __3.01___ seconds
 
-Part 2d:  _____ seconds
+Part 2d:  ___10.24__ seconds
 
 Part 2e:  _____ seconds
 
