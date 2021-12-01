@@ -131,11 +131,23 @@ Statement Tests:
 
   mywcproverb.txt: This file contains a Chinese proverb that covers
                    every possible executable line in mywc.c/mywc.s.
-                   
+                   This file hits every line of mywc.c/mywc.s and has
+                   complete code coverage.
+  mywcstatement.txt: This file contains randomly generated valid
+                     ASCII characters (including newlines, tabs,
+                     and spaces). This file also hits every
+                     single line of mywc.c/mywc.s, however,
+                     its focus is to test many different
+                     combinations and alternatives by
+                     randoly generating characters.
 
 Stress Tests:
 
-  mywcstress1.txt:
+  mywcstress1.txt: This file contains randomly generated valid
+                   ASCII characters generated from a function
+                   that randomly generated chars until either
+                   50,000 characters were printed or 1000 lines
+                   were reached. This file reaches 
   mywcstresscharlimit.txt:
   mywcstresslinelimit.txt:
 
