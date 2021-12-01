@@ -21,7 +21,23 @@ complete the assignment? COPY THE LIST of authorized sources of
 information given in the "Policies" web page to this section of the
 readme file, and edit it as appropriate.
 
+The course's lectures.
 
+The course's precepts.
+
+The course's website.
+
+Documents that are referenced directly by the course's website. Such documents include the course's lecture slides and precept handouts.
+
+The course's current staff members outside of class time through office hours.
+
+The course's current staff members outside of class time through meetings.
+
+The course's current staff members outside of class time through Ed.
+
+The course's current staff members outside of class time through e-mail.
+
+Current lab teaching assistants through visits to the course labs.
 
 ------------------------------------------------------------------------
 Student 2: What authorized sources of information did you use to
@@ -29,7 +45,23 @@ complete the assignment? COPY THE LIST of authorized sources of
 information given in the "Policies" web page to this section of the
 readme file, and edit it as appropriate.
 
+The course's lectures.
 
+The course's precepts.
+
+The course's website.
+
+Documents that are referenced directly by the course's website. Such documents include the course's lecture slides and precept handouts.
+
+The course's current staff members outside of class time through office hours.
+
+The course's current staff members outside of class time through meetings.
+
+The course's current staff members outside of class time through Ed.
+
+The course's current staff members outside of class time through e-mail.
+
+Current lab teaching assistants through visits to the course labs.
 
 ------------------------------------------------------------------------
 Student 1: What unauthorized sources of information did you use to
@@ -43,7 +75,7 @@ nature of the interaction, may additionally require the interaction
 being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
-
+None
 
 ------------------------------------------------------------------------
 Student 2: What unauthorized sources of information did you use to
@@ -57,30 +89,44 @@ nature of the interaction, may additionally require the interaction
 being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
-
+None
 
 ------------------------------------------------------------------------
 Student 1: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
-
+Interesting, helpful to learn arm64, somewhat fun
 
 ------------------------------------------------------------------------
 Student 2: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
-
+Interesting, helpful to learn arm64, somewhat fun
 
 ------------------------------------------------------------------------
 (optional) What information can you provide about your submission that
 will help your grader to grade it in the most favorable light? In
 particular, what bugs are in your submission?
 
-
+N/A
 
 ------------------------------------------------------------------------
 What is your mywc program test plan?
 
+Boundary Tests:
+
+  mywcblank.txt: 
+  mywcempty.txt:
+
+Statement Tests:
+
+  mywcproverb.txt:
+
+Stress Tests:
+
+  mywcstress1.txt:
+  mywcstresscharlimit.txt:
+  mywcstresslinelimit.txt:
 
 
 ------------------------------------------------------------------------
