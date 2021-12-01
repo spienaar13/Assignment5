@@ -115,12 +115,23 @@ What is your mywc program test plan?
 
 Boundary Tests:
 
-  mywcblank.txt: 
-  mywcempty.txt:
+  mywcblank.txt: This file contains a random selection of only spaces,
+                 tabs, and newlines. This file tests the boundary of
+                 using tabs and newlines, whose ASCII symbols are
+                 not in the range of the other alphanumeric/symbol
+                 ASCII values. Similarly, the file tests the boundary
+                 of having spaces and blankspace without words
+                 (expected word count is zero)
+  mywcempty.txt: This file contains no characters of any kind. This
+                 file tests the boundary of having no characters to 
+                 see what the program will do when being fed a 
+                 completely empty text.
 
 Statement Tests:
 
-  mywcproverb.txt:
+  mywcproverb.txt: This file contains a Chinese proverb that covers
+                   every possible executable line in mywc.c/mywc.s.
+                   
 
 Stress Tests:
 
