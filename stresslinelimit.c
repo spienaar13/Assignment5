@@ -14,7 +14,7 @@ const int newLineLimit = 1000;
 /* prints x and a newline to stdout until 5000 newlines
    have been printed. Returns 0 upon completion */
 int main(void) {
-   while(newLineCounter <= newLineLimit) {
+   while(newLineCounter < newLineLimit) {
       putchar('x');
       putchar('\n');
       newLineCounter++;

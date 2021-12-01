@@ -13,7 +13,7 @@ const int charLimit = 50000;
 
 /* prints x to stdout 5000 times and returns 0 upon completion */
 int main(void) {
-   while(charCounter <= charLimit) {
+   while(charCounter < charLimit) {
       putchar('x');
       charCounter++;
    }
