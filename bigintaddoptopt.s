@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------
-// bigintaddopt.s
+// bigintaddoptopt.
 // Author: Stephane Pienaar
 //----------------------------------------------------------------------
 
@@ -250,5 +250,4 @@ if5:
         add    sp, sp, BIGINT_ADD_STACK_BYTECOUNT
         ret
 
-        .size BigInt_add, (. - BigInt_add)
-        
+                .size BigInt_add, (. - BigInt_add)
