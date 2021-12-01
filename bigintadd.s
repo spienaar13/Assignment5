@@ -49,8 +49,8 @@ BigInt_larger:
         // long lLarger
 
         // if (lLength1 <= lLength2) goto else1;
-        str    x0, [sp, LLENGTH1]
-        str    x1, [sp, LLENGTH2]
+        str    x0, [sp, LLENGTH1]       // store function parameter in stack
+        str    x1, [sp, LLENGTH2]       // store function parameter in stack
         cmp    x0, x1
         ble    else1
 
