@@ -105,11 +105,10 @@ endif2:
         // lIndex = 0;
         mov LINDEX, xzr
 
-Loop1:
         // if(lIndex >= lSumLength) goto endLoop1;
-        cmp    LINDEX, LSUMLENGTH
-        bge    endLoop1
-
+        cmp LINDEX, LSUMLENGTH
+        bge endLoop1
+Loop1:
         // ulSum = ulCarry;
         mov ULSUM, ULCARRY
 
@@ -153,8 +152,9 @@ if4:
         // lIndex++;
         add LINDEX, LINDEX, 1
 
-        // goto Loop1;
-        b Loop1
+        // if(lIndex < lSumLength) goto Loop1;
+        cmp LINDEX, LSUMLENGTH
+        blt Loop1
 
 endLoop1:
         // if (ulCarry != 1) goto if5;
