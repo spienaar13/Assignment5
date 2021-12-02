@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------
 // bigintaddoptopt.
-// Author: Stephane Pienaar
+// Author: Stephane Pienaar and Charles Coppieters 't wallant
 //----------------------------------------------------------------------
 
         .equ FALSE, 0
