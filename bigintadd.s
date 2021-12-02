@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------
 // bigintadd.s
-// Author: Charles Coppieters 't wallant
+// Author: Charles Coppieters 't wallant and Stephane Pienaar
 //----------------------------------------------------------------------
        
         .equ FALSE, 0
